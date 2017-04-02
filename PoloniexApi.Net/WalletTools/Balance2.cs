@@ -6,240 +6,244 @@ using System.Threading.Tasks;
 
 namespace Jojatekok.PoloniexAPI.WalletTools
 {
-
-
-    public class __invalid_type__1CR
+    public interface QuoteCurrency
+    {
+        double available { get; set; }
+        double onOrders { get; set; }
+        double btcValue { get; set; }
+    }
+    public class __invalid_type__1CR : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class ABY
+    public class ABY  : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class AC
+    public class AC : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class ACH
+    public class ACH : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class ADN
+    public class ADN : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class AEON
+    public class AEON : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class AERO
+    public class AERO : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class AIR
+    public class AIR : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class AMP
+    public class AMP : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class APH
+    public class APH : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class ARCH
+    public class ARCH : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class ARDR
+    public class ARDR : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class AUR
+    public class AUR : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class AXIS
+    public class AXIS : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class BALLS
+    public class BALLS : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class BANK
+    public class BANK : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class BBL
+    public class BBL : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class BBR
+    public class BBR : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class BCC
+    public class BCC : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class BCN
+    public class BCN : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class BCY
+    public class BCY : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class BDC
+    public class BDC : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class BDG
+    public class BDG : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class BELA
+    public class BELA : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class BITCNY
+    public class BITCNY : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class BITS
+    public class BITS : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class BITUSD
+    public class BITUSD : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class BLK
+    public class BLK : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class BLOCK
+    public class BLOCK : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class BLU
+    public class BLU : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class BNS
+    public class BNS : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class BONES
+    public class BONES : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class BOST
+    public class BOST : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class BTC
+    public class BTC : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
@@ -251,392 +255,392 @@ namespace Jojatekok.PoloniexAPI.WalletTools
         }
     }
 
-    public class BTCD
+    public class BTCD : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class BTCS
+    public class BTCS : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class BTM
+    public class BTM : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class BTS
+    public class BTS : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class BURN
+    public class BURN : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class BURST
+    public class BURST : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class C2
+    public class C2 : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class CACH
+    public class CACH : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class CAI
+    public class CAI : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class CC
+    public class CC : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class CCN
+    public class CCN : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class CGA
+    public class CGA : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class CHA
+    public class CHA : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class CINNI
+    public class CINNI : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class CLAM
+    public class CLAM : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class CNL
+    public class CNL : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class CNMT
+    public class CNMT : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class CNOTE
+    public class CNOTE : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class COMM
+    public class COMM : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class CON
+    public class CON : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class CORG
+    public class CORG : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class CRYPT
+    public class CRYPT : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class CURE
+    public class CURE : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class CYC
+    public class CYC : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class DAO
+    public class DAO : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class DASH
+    public class DASH : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class DCR
+    public class DCR : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class DGB
+    public class DGB : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class DICE
+    public class DICE : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class DIEM
+    public class DIEM : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class DIME
+    public class DIME : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class DIS
+    public class DIS : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class DNS
+    public class DNS : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class DOGE
+    public class DOGE : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class DRKC
+    public class DRKC : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class DRM
+    public class DRM : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class DSH
+    public class DSH : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class DVK
+    public class DVK : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class EAC
+    public class EAC : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class EBT
+    public class EBT : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class ECC
+    public class ECC : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class EFL
+    public class EFL : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class EMC2
+    public class EMC2 : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class EMO
+    public class EMO : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class ENC
+    public class ENC : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class ETC
+    public class ETC : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class ETH
+    public class ETH : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class ETOK
+    public class ETOK : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class EXE
+    public class EXE : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class EXP
+    public class EXP : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class FAC
+    public class FAC : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class FCN
+    public class FCN : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class FCT
+    public class FCT : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class FIBRE
+    public class FIBRE : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class FLAP
+    public class FLAP : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class FLDC
+    public class FLDC : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
@@ -648,1365 +652,1365 @@ namespace Jojatekok.PoloniexAPI.WalletTools
         }
     }
 
-    public class FLO
+    public class FLO : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class FLT
+    public class FLT : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class FOX
+    public class FOX : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class FRAC
+    public class FRAC : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class FRK
+    public class FRK : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class FRQ
+    public class FRQ : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class FVZ
+    public class FVZ : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class FZ
+    public class FZ : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class FZN
+    public class FZN : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class GAME
+    public class GAME : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class GAP
+    public class GAP : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class GDN
+    public class GDN : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class GEMZ
+    public class GEMZ : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class GEO
+    public class GEO : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class GIAR
+    public class GIAR : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class GLB
+    public class GLB : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class GML
+    public class GML : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class GNS
+    public class GNS : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class GNT
+    public class GNT : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class GOLD
+    public class GOLD : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class GPC
+    public class GPC : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class GPUC
+    public class GPUC : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class GRC
+    public class GRC : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class GRCX
+    public class GRCX : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class GRS
+    public class GRS : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class GUE
+    public class GUE : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class H2O
+    public class H2O : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class HIRO
+    public class HIRO : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class HOT
+    public class HOT : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class HUC
+    public class HUC : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class HUGE
+    public class HUGE : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class HVC
+    public class HVC : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class HYP
+    public class HYP : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class HZ
+    public class HZ : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class IFC
+    public class IFC : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class INDEX
+    public class INDEX : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class IOC
+    public class IOC : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class ITC
+    public class ITC : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class IXC
+    public class IXC : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class JLH
+    public class JLH : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class JPC
+    public class JPC : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class JUG
+    public class JUG : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class KDC
+    public class KDC : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class KEY
+    public class KEY : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class LBC
+    public class LBC : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class LC
+    public class LC : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class LCL
+    public class LCL : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class LEAF
+    public class LEAF : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class LGC
+    public class LGC : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class LOL
+    public class LOL : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class LOVE
+    public class LOVE : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class LQD
+    public class LQD : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class LSK
+    public class LSK : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class LTBC
+    public class LTBC : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class LTC
+    public class LTC : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class LTCX
+    public class LTCX : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class MAID
+    public class MAID : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class MAST
+    public class MAST : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class MAX
+    public class MAX : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class MCN
+    public class MCN : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class MEC
+    public class MEC : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class METH
+    public class METH : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class MIL
+    public class MIL : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class MIN
+    public class MIN : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class MINT
+    public class MINT : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class MMC
+    public class MMC : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class MMNXT
+    public class MMNXT : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class MMXIV
+    public class MMXIV : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class MNTA
+    public class MNTA : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class MON
+    public class MON : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class MRC
+    public class MRC : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class MRS
+    public class MRS : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class MTS
+    public class MTS : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class MUN
+    public class MUN : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class MYR
+    public class MYR : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class MZC
+    public class MZC : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class N5X
+    public class N5X : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class NAS
+    public class NAS : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class NAUT
+    public class NAUT : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class NAV
+    public class NAV : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class NBT
+    public class NBT : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class NEOS
+    public class NEOS : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class NL
+    public class NL : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class NMC
+    public class NMC : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class NOBL
+    public class NOBL : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class NOTE
+    public class NOTE : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class NOXT
+    public class NOXT : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class NRS
+    public class NRS : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class NSR
+    public class NSR : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class NTX
+    public class NTX : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class NXC
+    public class NXC : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class NXT
+    public class NXT : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class NXTI
+    public class NXTI : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class OMNI
+    public class OMNI : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class OPAL
+    public class OPAL : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class PAND
+    public class PAND : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class PASC
+    public class PASC : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class PAWN
+    public class PAWN : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class PIGGY
+    public class PIGGY : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class PINK
+    public class PINK : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class PLX
+    public class PLX : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class PMC
+    public class PMC : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class POT
+    public class POT : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class PPC
+    public class PPC : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class PRC
+    public class PRC : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class PRT
+    public class PRT : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class PTS
+    public class PTS : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class Q2C
+    public class Q2C : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class QBK
+    public class QBK : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class QCN
+    public class QCN : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class QORA
+    public class QORA : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class QTL
+    public class QTL : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class RADS
+    public class RADS : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class RBY
+    public class RBY : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class RDD
+    public class RDD : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class REP
+    public class REP : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class RIC
+    public class RIC : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class RZR
+    public class RZR : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class SBD
+    public class SBD : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class SC
+    public class SC : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class SDC
+    public class SDC : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class SHIBE
+    public class SHIBE : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class SHOPX
+    public class SHOPX : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class SILK
+    public class SILK : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class SJCX
+    public class SJCX : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class SLR
+    public class SLR : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class SMC
+    public class SMC : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class SOC
+    public class SOC : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class SPA
+    public class SPA : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class SQL
+    public class SQL : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class SRCC
+    public class SRCC : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class SRG
+    public class SRG : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class SSD
+    public class SSD : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class STEEM
+    public class STEEM : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class STR
+    public class STR : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class STRAT
+    public class STRAT : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class SUM
+    public class SUM : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class SUN
+    public class SUN : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class SWARM
+    public class SWARM : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class SXC
+    public class SXC : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class SYNC
+    public class SYNC : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class SYS
+    public class SYS : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class TAC
+    public class TAC : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class TOR
+    public class TOR : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class TRUST
+    public class TRUST : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class TWE
+    public class TWE : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class UIS
+    public class UIS : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class ULTC
+    public class ULTC : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class UNITY
+    public class UNITY : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class URO
+    public class URO : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class USDE
+    public class USDE : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class USDT
+    public class USDT : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class UTC
+    public class UTC : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class UTIL
+    public class UTIL : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class UVC
+    public class UVC : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class VIA
+    public class VIA : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class VOOT
+    public class VOOT : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class VOX
+    public class VOX : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class VRC
+    public class VRC : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class VTC
+    public class VTC : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class WC
+    public class WC : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class WDC
+    public class WDC : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class WIKI
+    public class WIKI : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class WOLF
+    public class WOLF : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class X13
+    public class X13 : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class XAI
+    public class XAI : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class XAP
+    public class XAP : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class XBC
+    public class XBC : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class XC
+    public class XC : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class XCH
+    public class XCH : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class XCN
+    public class XCN : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class XCP
+    public class XCP : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class XCR
+    public class XCR : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class XDN
+    public class XDN : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class XDP
+    public class XDP : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class XEM
+    public class XEM : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class XHC
+    public class XHC : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class XLB
+    public class XLB : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class XMG
+    public class XMG : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class XMR
+    public class XMR : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class XPB
+    public class XPB : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class XPM
+    public class XPM : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class XRP
+    public class XRP : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class XSI
+    public class XSI : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class XST
+    public class XST : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class XSV
+    public class XSV : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class XUSD
+    public class XUSD : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class XVC
+    public class XVC : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class XXC
+    public class XXC : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class YACC
+    public class YACC : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class YANG
+    public class YANG : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class YC
+    public class YC : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class YIN
+    public class YIN : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class ZEC
+    public class ZEC : QuoteCurrency
     {
         public double available { get; set; }
         public double onOrders { get; set; }
         public double btcValue { get; set; }
     }
 
-    public class Balance2
+    public class Balance2 
     {
         public ABY ABY { get; set; }
         public AC AC { get; set; }

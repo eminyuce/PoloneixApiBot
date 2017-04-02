@@ -9,6 +9,7 @@ using System.Reflection;
 using PoloneixApiBot.Entities;
 using PoloneixApiBot.Repositories;
 using System.Threading;
+using Jojatekok.PoloniexAPI.WalletTools;
 
 namespace PoloneixApiBot
 {
@@ -116,60 +117,92 @@ namespace PoloneixApiBot
         }
         public async void StartTrading()
         {
-            //PoloniexClient.Trading.GetTradesAsync(new CurrencyPair("BTC", "ETC"));
+            var cnt = QuoteCurrency.Keys.Count;
+            var p = PoloniexClient.Wallet.GetBalances2Async();
+            p.Wait();
+            BTC bitcoinObj = p.Result.BTC;
+            String quoteCurrency = "FLDC";
+            StartTradingQuoteCurrency(p.Result, bitcoinObj ,quoteCurrency);
+        }
+
+
+        private QuoteCurrency GetQuoteCurrency(Balance2 p, String quoteCurrency = "FLDC")
+        {
+            switch (quoteCurrency)
+            {
+                case "FLDC": return p.FLDC;
+                case "AMP": return p.AMP;
+                default:
+                    return p.FLDC;
+            }
+        }
+        public async void StartTradingQuoteCurrency(Balance2 p, BTC bitcoinObj , String quoteCurrency = "FLDC")
+        {
             try
             {
+                var markets = PoloniexClient.Markets.GetOpenOrdersAsync(new CurrencyPair("BTC", quoteCurrency));
+                markets.Wait();
+
+
+                QuoteCurrency quoteCurrencyObj = GetQuoteCurrency(p, quoteCurrency);
                
-                String quoteCurrency = "FLDC";
-          
 
-                var cnt = QuoteCurrency.Keys.Count;
-                var p = PoloniexClient.Wallet.GetBalances2Async();
-                p.Wait();
-                var p2 = p.Result;
-
-                var fldcValue = p.Result.FLDC.btcValue;
-                if (p2.BTC.available > 0)
+                var fldcValue = quoteCurrencyObj.btcValue;
+                try
                 {
-                    Console.WriteLine(p.Result.BTC);
-                    var markets = PoloniexClient.Markets.GetOpenOrdersAsync(new CurrencyPair("BTC", quoteCurrency));
-                    markets.Wait();
-                    var currencyBuyPrice = markets.Result.SellOrders.FirstOrDefault().PricePerCoin;
+                    double altLimitForBTC = 0.0001;
+                    if (bitcoinObj.available > altLimitForBTC)
+                    {
+                        Console.WriteLine(bitcoinObj);
 
-                    double pricePerCoin = currencyBuyPrice - currencyBuyPrice * 0.4;
-                    double amountQuote = p.Result.BTC.available / pricePerCoin;
-                    var www = PoloniexClient.Trading.PostOrderAsync(new CurrencyPair("BTC", quoteCurrency),
-                       OrderType.Buy,
-                       pricePerCoin,
-                       amountQuote);
-                    www.Wait();
-                    Console.WriteLine(www.Result);
+                        var currencyBuyPrice = markets.Result.SellOrders.FirstOrDefault().PricePerCoin;
 
-                    Console.WriteLine("Buying:" + quoteCurrency + "  pricePerCoin:" + String.Format("{0:F20}", pricePerCoin) + "  amountQuote:" + amountQuote + " ");
+                        double pricePerCoin = currencyBuyPrice - currencyBuyPrice * 0.1;
+                        double amountQuote = bitcoinObj.available / pricePerCoin;
+                      
+                        var www = PoloniexClient.Trading.PostOrderAsync(new CurrencyPair("BTC", quoteCurrency),
+                           OrderType.Buy,
+                           pricePerCoin,
+                           amountQuote);
+                        www.Wait();
+                        Console.WriteLine(www.Result);
 
-                    SyncTrades(quoteCurrency);
+                        Console.WriteLine("Buying:" + quoteCurrency + "  pricePerCoin:" + String.Format("{0:F20}", pricePerCoin) + "  amountQuote:" + amountQuote + " ");
+                        Thread.Sleep(500);
+                        SyncTrades(quoteCurrency);
+               
+                    }
 
                 }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                     
+                }
+           
 
-
-                if (p.Result.FLDC.available > 0)
+                if (quoteCurrencyObj.available > 0)
                 {
 
-                    Console.WriteLine(p.Result.FLDC);
-                    var aFdlc = p.Result.FLDC.available;
+                    Console.WriteLine(quoteCurrencyObj);
+                    var aFdlc = quoteCurrencyObj.available;
                     var latestQuote = SellBuyOrderQuoteRepository.GetLatestTransactionCurrency(quoteCurrency, OrderType.Buy.ToString());
 
-                    var markets = PoloniexClient.Markets.GetOpenOrdersAsync(new CurrencyPair("BTC", quoteCurrency));
-                    markets.Wait();
-                    var currencyBuyPrice = markets.Result.BuyOrders.FirstOrDefault().PricePerCoin;
+
+                    var firstBuyOrder = markets.Result.BuyOrders.FirstOrDefault();
+                    var currencyBuyPrice = firstBuyOrder.PricePerCoin;
+                    Console.WriteLine("BuyOrders:" + quoteCurrency + "  pricePerCoin:" 
+                        + String.Format("{0:F20}", firstBuyOrder.PricePerCoin) 
+                        + "  amountQuote:" + firstBuyOrder.AmountQuote + " ");
 
 
-                    var newAmountBase = currencyBuyPrice + currencyBuyPrice * 0.5;
-                    double pricePerCoin = fldcValue / aFdlc;
+                    var newAmountBase = currencyBuyPrice + currencyBuyPrice * 0.1;
+                    double pricePerCoin =  newAmountBase;
                     double amountQuote = aFdlc;
 
-                    if (p.Result.FLDC.btcValue > newAmountBase)
+                    if (quoteCurrencyObj.btcValue > newAmountBase)
                     {
+                         
                         var www = PoloniexClient.Trading.PostOrderAsync(new CurrencyPair("BTC", quoteCurrency),
                             OrderType.Sell,
                             pricePerCoin,
@@ -178,8 +211,13 @@ namespace PoloneixApiBot
                         Console.WriteLine(www.Result);
 
 
-                        Console.WriteLine("Selling:"+quoteCurrency+"  pricePerCoin:" + String.Format("{0:F20}", pricePerCoin) + "  amountQuote:" + amountQuote+" ");
+                        Console.WriteLine("Selling:"+quoteCurrency+"  pricePerCoin:" + 
+                            String.Format("{0:F20}", pricePerCoin) +
+                            "  amountQuote:" + amountQuote+ " currencyBuyPrice:"
+                            + String.Format("{0:F20}", currencyBuyPrice) + " newAmountBase:"
+                            + String.Format("{0:F20}", newAmountBase));
                         SyncTrades(quoteCurrency);
+                        Thread.Sleep(500);
                     }
 
                 }
