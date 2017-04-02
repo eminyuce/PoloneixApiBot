@@ -165,8 +165,8 @@ namespace PoloneixApiBot
                 var markets = PoloniexClient.Markets.GetOpenOrdersAsync(new CurrencyPair("BTC", quoteCurrency));
                 markets.Wait();
 
-                BuyCurrency(quoteCurrencyObj, bitcoinObj, quoteCurrency, markets);
-                SellCurrency(quoteCurrencyObj, quoteCurrency, markets);
+                BuyCurrency(quoteCurrencyObj, bitcoinObj, quoteCurrency, markets.Result);
+                SellCurrency(quoteCurrencyObj, quoteCurrency, markets.Result);
 
             }
             catch (Exception ex)
@@ -180,7 +180,7 @@ namespace PoloneixApiBot
             Console.ReadKey();
         }
 
-        private void SellCurrency(QuoteCurrency quoteCurrencyObj, string quoteCurrency, Task<Jojatekok.PoloniexAPI.MarketTools.IOrderBook> markets)
+        private void SellCurrency(QuoteCurrency quoteCurrencyObj, string quoteCurrency,Jojatekok.PoloniexAPI.MarketTools.IOrderBook markets)
         {
             if (quoteCurrencyObj.available > 0)
             {
@@ -191,7 +191,7 @@ namespace PoloneixApiBot
                     OrderType.Buy.ToString());
 
 
-                var firstBuyOrder = markets.Result.BuyOrders.FirstOrDefault();
+                var firstBuyOrder = markets.BuyOrders.FirstOrDefault();
                 var currencyBuyPrice = latestQuote.PricePerCoin;
                 if (latestQuote.PricePerCoin < firstBuyOrder.PricePerCoin)
                 {
@@ -230,7 +230,7 @@ namespace PoloneixApiBot
             }
         }
 
-        private void BuyCurrency(QuoteCurrency quoteCurrencyObj, BTC bitcoinObj, string quoteCurrency, Task<Jojatekok.PoloniexAPI.MarketTools.IOrderBook> markets)
+        private void BuyCurrency(QuoteCurrency quoteCurrencyObj, BTC bitcoinObj, string quoteCurrency, Jojatekok.PoloniexAPI.MarketTools.IOrderBook markets)
         {
             var fldcValue = quoteCurrencyObj.btcValue;
             try
@@ -240,7 +240,7 @@ namespace PoloneixApiBot
                 {
                     Console.WriteLine(bitcoinObj);
 
-                    var currencyBuyPrice = markets.Result.SellOrders.FirstOrDefault().PricePerCoin;
+                    var currencyBuyPrice = markets.SellOrders.FirstOrDefault().PricePerCoin;
 
                     double pricePerCoin = currencyBuyPrice - currencyBuyPrice * 0.1;
                     double amountQuote = bitcoinObj.available / pricePerCoin;
