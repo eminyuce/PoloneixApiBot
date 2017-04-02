@@ -126,6 +126,12 @@ namespace PoloneixApiBot
 
             foreach (var quoteCurrency in QuoteCurrency.Keys)
             {
+                var quoteCurrencyObj = GetQuoteCurrency(p.Result, quoteCurrency);
+                var latestBuyQuote = SellBuyOrderQuoteRepository.GetLatestTransactionCurrency(quoteCurrency,
+                        OrderType.Buy.ToString());
+                var latestSellQuote = SellBuyOrderQuoteRepository.GetLatestTransactionCurrency(quoteCurrency,
+                        OrderType.Sell.ToString());
+
                 if (QuoteCurrency[quoteCurrency] > 0)
                 {
                     BTC bitcoinObjFldc = new BTC();
@@ -137,7 +143,7 @@ namespace PoloneixApiBot
 
                         bitcoinObjFldc.available = BitcoinForEachCurreny;
                         totalBitcoinValue = totalBitcoinValue - BitcoinForEachCurreny;
-                        StartTradingQuoteCurrency(GetQuoteCurrency(p.Result, quoteCurrency), bitcoinObj, quoteCurrency);
+                        StartTradingQuoteCurrency(quoteCurrencyObj, bitcoinObj, quoteCurrency);
                     }
 
                 }
