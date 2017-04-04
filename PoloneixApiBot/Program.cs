@@ -4,20 +4,42 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Jojatekok.PoloniexAPI;
+using System.Configuration.Install;
+using System.ServiceProcess;
+using System.Reflection;
+using NLog;
 
 namespace PoloneixApiBot
 {
     class Program
     {
-        public static string PublicKey;
-        public static string PrivateKey; 
+        protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         static void Main(string[] args)
         {
-            var p = new PatienceBot(PublicKey, PrivateKey);
-            p.StartTrading();
+            if (Environment.UserInteractive)
+            {
+                Logger.Info("PoloneixApiBot is started.");
+                string parameter = string.Concat(args);
+                switch (parameter)
+                {
+                    case "--install":
+                        ManagedInstallerClass.InstallHelper(new[] { Assembly.GetExecutingAssembly().Location });
+                        break;
+                    case "--uninstall":
+                        ManagedInstallerClass.InstallHelper(new[] { "/u", Assembly.GetExecutingAssembly().Location });
+                        break;
+                }
+            }
+            else
+            {
+                ServiceBase[] ServicesToRun;
+                ServicesToRun = new ServiceBase[] { new TradingService() };
+                ServiceBase.Run(ServicesToRun);
+            }
+
 
         }
-        
+
     }
 }
