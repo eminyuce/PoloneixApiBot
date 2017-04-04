@@ -15,6 +15,7 @@ namespace PoloneixApiBot.Quartz.QuartzJob
         public static string PublicKey;
         public static string PrivateKey;
 
+
         public void Execute(IJobExecutionContext context)
         {
             var stopwatch = new Stopwatch();

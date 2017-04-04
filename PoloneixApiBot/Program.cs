@@ -17,6 +17,12 @@ namespace PoloneixApiBot
 
         static void Main(string[] args)
         {
+            StartInstaller(args);
+
+        }
+
+        private static void StartInstaller(string[] args)
+        {
             if (Environment.UserInteractive)
             {
                 Logger.Info("PoloneixApiBot is started.");
@@ -37,9 +43,6 @@ namespace PoloneixApiBot
                 ServicesToRun = new ServiceBase[] { new TradingService() };
                 ServiceBase.Run(ServicesToRun);
             }
-
-
         }
-
     }
 }

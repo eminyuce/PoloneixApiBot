@@ -87,6 +87,7 @@
     <Compile Include="Entities\PQuoteCurrency.cs" />
     <Compile Include="Entities\SellBuyOrderQuote.cs" />
     <Compile Include="Helpers\Convert.cs" />
+    <Compile Include="Helpers\QuoteCurrencyHelper.cs" />
     <Compile Include="Installer1.cs">
       <SubType>Component</SubType>
     </Compile>

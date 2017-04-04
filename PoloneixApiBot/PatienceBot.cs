@@ -11,6 +11,7 @@ using PoloneixApiBot.Repositories;
 using System.Threading;
 using Jojatekok.PoloniexAPI.WalletTools;
 using NLog;
+using PoloneixApiBot.Helpers;
 
 namespace PoloneixApiBot
 {
@@ -66,7 +67,7 @@ namespace PoloneixApiBot
                     try
                     {
                         var percentage = QuoteCurrency.TotalBitcoinPercantege;
-                        var quoteCurrencyObj = GetQuoteCurrency(p.Result, quoteCurrencySymbol);
+                        var quoteCurrencyObj = QuoteCurrencyHelper.GetQuoteCurrency(p.Result, quoteCurrencySymbol);
                         var markets = PoloniexClient.Markets.GetOpenOrdersAsync(new CurrencyPair("BTC", QuoteCurrency.QuoteCurrencySymbol));
                         markets.Wait();
                         var openOrdersForCurrency = PoloniexClient.Trading.GetOpenOrdersAsync(new CurrencyPair("BTC", QuoteCurrency.QuoteCurrencySymbol));
@@ -103,26 +104,7 @@ namespace PoloneixApiBot
         }
 
 
-        private QuoteCurrency GetQuoteCurrency(Balance2 p, String quoteCurrency = "FLDC")
-        {
-            switch (quoteCurrency)
-            {
-
-                case "FLDC": return p.FLDC;
-                case "AMP": return p.AMP;
-                case "SDC": return p.SDC;
-                case "BURST": return p.BURST;
-                case "STEEM": return p.STEEM;
-                case "XMR": return p.XMR;
-                case "PASC": return p.PASC;
-                case "ETC": return p.ETC;
-                case "ETH": return p.ETH;
-                case "XRP": return p.XRP;
-
-                default:
-                    return p.FLDC;
-            }
-        }
+   
 
 
         private void SellCurrency(QuoteCurrency quoteCurrencyObj,
