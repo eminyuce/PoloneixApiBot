@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="DB\DatabaseUtility.cs" />
     <Compile Include="DB\DBDirectory.cs" />
+    <Compile Include="Entities\PQuoteCurrency.cs" />
     <Compile Include="Entities\SellBuyOrderQuote.cs" />
     <Compile Include="Helpers\Convert.cs" />
     <Compile Include="PatienceBot.cs" />

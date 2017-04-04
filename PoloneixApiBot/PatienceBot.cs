@@ -10,147 +10,81 @@ using PoloneixApiBot.Entities;
 using PoloneixApiBot.Repositories;
 using System.Threading;
 using Jojatekok.PoloniexAPI.WalletTools;
+using NLog;
 
 namespace PoloneixApiBot
 {
     public class PatienceBot
     {
+        protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
         private PoloniexClient PoloniexClient { get; set; }
-        private Dictionary<String, int> QuoteCurrency { get; set; }
+        private Dictionary<String, PQuoteCurrency> QuoteCurrencyDic { get; set; }
 
         private static double BitcoinForEachCurreny = 0.0025;
 
         public PatienceBot(string publicKey, string privateKey)
         {
             PoloniexClient = new PoloniexClient(publicKey, privateKey);
-            QuoteCurrency = new Dictionary<String, int>();
+            QuoteCurrencyDic = new Dictionary<String, PQuoteCurrency>();
 
-            QuoteCurrency.Add("	AMP	", 20);
-            QuoteCurrency.Add("	ARDR	", 20);
-            QuoteCurrency.Add("	BBR	", 20);
-            QuoteCurrency.Add("	BCN	", 20);
-            QuoteCurrency.Add("	BCY	", 20);
-            QuoteCurrency.Add("	BELA	", 20);
-            QuoteCurrency.Add("	BITS	", 20);
-            QuoteCurrency.Add("	BLK	", 20);
-            QuoteCurrency.Add("	BTCD	", 20);
-            QuoteCurrency.Add("	BTM	", 20);
-            QuoteCurrency.Add("	BTS	", 20);
-            QuoteCurrency.Add("	BURST	", 20);
-            QuoteCurrency.Add("	C2	", 20);
-            QuoteCurrency.Add("	CLAM	", 20);
-            QuoteCurrency.Add("	CURE	", 20);
-            QuoteCurrency.Add("	DASH	", 20);
-            QuoteCurrency.Add("	DCR	", 20);
-            QuoteCurrency.Add("	DGB	", 20);
-            QuoteCurrency.Add("	DOGE	", 20);
-            QuoteCurrency.Add("	EMC2	", 20);
-            QuoteCurrency.Add("	ETC	", 20);
-            QuoteCurrency.Add("	ETH	", 20);
-            QuoteCurrency.Add("	EXP	", 20);
-            QuoteCurrency.Add("	FCT	", 20);
-            QuoteCurrency.Add("	FLDC	", 20);
-            QuoteCurrency.Add("	FLO	", 20);
-            QuoteCurrency.Add("	GAME	", 20);
-            QuoteCurrency.Add("	GNT	", 20);
-            QuoteCurrency.Add("	GRC	", 20);
-            QuoteCurrency.Add("	HUC	", 20);
-            QuoteCurrency.Add("	HZ	", 20);
-            QuoteCurrency.Add("	IOC	", 20);
-            QuoteCurrency.Add("	LBC	", 20);
-            QuoteCurrency.Add("	LSK	", 20);
-            QuoteCurrency.Add("	LTC	", 20);
-            QuoteCurrency.Add("	MAID	", 20);
-            QuoteCurrency.Add("	MYR	", 20);
-            QuoteCurrency.Add("	NAUT	", 20);
-            QuoteCurrency.Add("	NAV	", 20);
-            QuoteCurrency.Add("	NEOS	", 20);
-            QuoteCurrency.Add("	NMC	", 20);
-            QuoteCurrency.Add("	NOBL	", 20);
-            QuoteCurrency.Add("	NOTE	", 20);
-            QuoteCurrency.Add("	NSR	", 20);
-            QuoteCurrency.Add("	NXC	", 20);
-            QuoteCurrency.Add("	NXT	", 20);
-            QuoteCurrency.Add("	OMNI	", 20);
-            QuoteCurrency.Add("	PASC	", 20);
-            QuoteCurrency.Add("	PINK	", 20);
-            QuoteCurrency.Add("	POT	", 20);
-            QuoteCurrency.Add("	PPC	", 20);
-            QuoteCurrency.Add("	QBK	", 20);
-            QuoteCurrency.Add("	QORA	", 20);
-            QuoteCurrency.Add("	QTL	", 20);
-            QuoteCurrency.Add("	RADS	", 20);
-            QuoteCurrency.Add("	RBY	", 20);
-            QuoteCurrency.Add("	REP	", 20);
-            QuoteCurrency.Add("	RIC	", 20);
-            QuoteCurrency.Add("	SBD	", 20);
-            QuoteCurrency.Add("	SC	", 20);
-            QuoteCurrency.Add("	SDC	", 20);
-            QuoteCurrency.Add("	SJCX	", 20);
-            QuoteCurrency.Add("	STEEM	", 20);
-            QuoteCurrency.Add("	STR	", 20);
-            QuoteCurrency.Add("	STRAT	", 20);
-            QuoteCurrency.Add("	SYS	", 20);
-            QuoteCurrency.Add("	UNITY	", 20);
-            QuoteCurrency.Add("	USDT	", 20);
-            QuoteCurrency.Add("	VIA	", 20);
-            QuoteCurrency.Add("	VOX	", 20);
-            QuoteCurrency.Add("	VRC	", 20);
-            QuoteCurrency.Add("	VTC	", 20);
-            QuoteCurrency.Add("	XBC	", 20);
-            QuoteCurrency.Add("	XCP	", 20);
-            QuoteCurrency.Add("	XEM	", 20);
-            QuoteCurrency.Add("	XMG	", 20);
-            QuoteCurrency.Add("	XMR	", 20);
-            QuoteCurrency.Add("	XPM	", 20);
-            QuoteCurrency.Add("	XRP	", 20);
-            QuoteCurrency.Add("	XVC	", 20);
-            QuoteCurrency.Add("	ZEC	", 20);
-            QuoteCurrency = QuoteCurrency.ToDictionary(x => x.Key.Trim(), x => x.Value);
+            QuoteCurrencyDic.Add("AMP", new PQuoteCurrency(5,4,4, "AMP"));
+            QuoteCurrencyDic.Add("FLDC", new PQuoteCurrency(5, 3, 3, "FLDC"));
+                
         }
         public async void LoadMarketSummaryAsync()
         {
             var markets = await PoloniexClient.Markets.GetSummaryAsync();
             foreach (var item in markets.Keys)
             {
-                Console.WriteLine(item.BaseCurrency);
+                Logger.Info(item.BaseCurrency);
             }
         }
         public async void StartTrading()
         {
-            var cnt = QuoteCurrency.Keys.Count;
+            var cnt = QuoteCurrencyDic.Keys.Count;
             var p = PoloniexClient.Wallet.GetBalances2Async();
             p.Wait();
             BTC bitcoinObj = p.Result.BTC;
             double totalBitcoinValue = bitcoinObj.available;
 
-            foreach (var quoteCurrency in QuoteCurrency.Keys)
+            foreach (var quoteCurrencySymbol in QuoteCurrencyDic.Keys)
             {
-                var quoteCurrencyObj = GetQuoteCurrency(p.Result, quoteCurrency);
-                var latestBuyQuote = SellBuyOrderQuoteRepository.GetLatestTransactionCurrency(quoteCurrency,
-                        OrderType.Buy.ToString());
-                var latestSellQuote = SellBuyOrderQuoteRepository.GetLatestTransactionCurrency(quoteCurrency,
-                        OrderType.Sell.ToString());
+                var QuoteCurrency = QuoteCurrencyDic[quoteCurrencySymbol];
 
-                if (QuoteCurrency[quoteCurrency] > 0)
+                // Play only selected currency.
+                if (QuoteCurrency.TotalBitcoinPercantege > 0)
                 {
-                    BTC bitcoinObjFldc = new BTC();
-                    bitcoinObjFldc.btcValue = bitcoinObj.btcValue;
-                    bitcoinObjFldc.onOrders = bitcoinObj.onOrders;
 
-                    if (totalBitcoinValue > BitcoinForEachCurreny)
+
+                    var percentage = QuoteCurrency.TotalBitcoinPercantege;
+                    var quoteCurrencyObj = GetQuoteCurrency(p.Result, quoteCurrencySymbol);
+                    var markets = PoloniexClient.Markets.GetOpenOrdersAsync(new CurrencyPair("BTC", QuoteCurrency.QuoteCurrencySymbol));
+                    markets.Wait();
+                    var openOrdersForCurrency = PoloniexClient.Trading.GetOpenOrdersAsync(new CurrencyPair("BTC", QuoteCurrency.QuoteCurrencySymbol));
+                    openOrdersForCurrency.Wait();
+
+                    if (!openOrdersForCurrency.Result.Any() && totalBitcoinValue > 0)
                     {
-
-                        bitcoinObjFldc.available = BitcoinForEachCurreny;
-                        totalBitcoinValue = totalBitcoinValue - BitcoinForEachCurreny;
-                        StartTradingQuoteCurrency(quoteCurrencyObj, bitcoinObj, quoteCurrency);
+                        BTC bitcoinObjFldc = new BTC();
+                        bitcoinObjFldc.btcValue = bitcoinObj.btcValue;
+                        bitcoinObjFldc.onOrders = bitcoinObj.onOrders;
+                        bitcoinObjFldc.available = totalBitcoinValue * percentage / 100.0;
+                        totalBitcoinValue = totalBitcoinValue - bitcoinObjFldc.available;
+                        BuyCurrency(quoteCurrencyObj, bitcoinObjFldc, QuoteCurrency, markets.Result);
                     }
 
+
+                    if (!openOrdersForCurrency.Result.Any(r => r.Type == OrderType.Sell))
+                    {
+                        SellCurrency(quoteCurrencyObj, QuoteCurrency, markets.Result);
+                    }
                 }
+
             }
 
-
-
+            //Logger.Info("Type anything to continue.");
+            //Console.ReadKey();
         }
 
 
@@ -164,34 +98,16 @@ namespace PoloneixApiBot
                     return p.FLDC;
             }
         }
-        public async void StartTradingQuoteCurrency(QuoteCurrency quoteCurrencyObj, BTC bitcoinObj, String quoteCurrency = "FLDC")
-        {
-            try
-            {
-                var markets = PoloniexClient.Markets.GetOpenOrdersAsync(new CurrencyPair("BTC", quoteCurrency));
-                markets.Wait();
+       
 
-                BuyCurrency(quoteCurrencyObj, bitcoinObj, quoteCurrency, markets.Result);
-                SellCurrency(quoteCurrencyObj, quoteCurrency, markets.Result);
-
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-
-            // PoloniexClient.Trading.GetOpenOrdersAsync(new CurrencyPair("));
-
-            Console.WriteLine("Type anything to continue.");
-            Console.ReadKey();
-        }
-
-        private void SellCurrency(QuoteCurrency quoteCurrencyObj, string quoteCurrency,Jojatekok.PoloniexAPI.MarketTools.IOrderBook markets)
+        private void SellCurrency(QuoteCurrency quoteCurrencyObj,
+            PQuoteCurrency quoteCurrencyObj2, 
+            Jojatekok.PoloniexAPI.MarketTools.IOrderBook markets)
         {
             if (quoteCurrencyObj.available > 0)
             {
-
-                Console.WriteLine(quoteCurrencyObj);
+                string quoteCurrency = quoteCurrencyObj2.QuoteCurrencySymbol;
+                Logger.Info(quoteCurrencyObj);
                 var aFdlc = quoteCurrencyObj.available;
                 var latestQuote = SellBuyOrderQuoteRepository.GetLatestTransactionCurrency(quoteCurrency,
                     OrderType.Buy.ToString());
@@ -204,12 +120,12 @@ namespace PoloneixApiBot
                     currencyBuyPrice = firstBuyOrder.PricePerCoin;
                 }
 
-                Console.WriteLine("BuyOrders:" + quoteCurrency + "  pricePerCoin:"
+                Logger.Info("BuyOrders:" + quoteCurrency + "  pricePerCoin:"
                     + String.Format("{0:F20}", firstBuyOrder.PricePerCoin)
                     + "  amountQuote:" + firstBuyOrder.AmountQuote + " ");
 
 
-                var newAmountBase = currencyBuyPrice + currencyBuyPrice * 0.1;
+                var newAmountBase = currencyBuyPrice + currencyBuyPrice * quoteCurrencyObj2.SellOrderPricePercantege / 100.0;
                 double pricePerCoin = newAmountBase;
                 double amountQuote = aFdlc;
 
@@ -221,34 +137,37 @@ namespace PoloneixApiBot
                         pricePerCoin,
                         amountQuote);
                     www.Wait();
-                    Console.WriteLine(www.Result);
+                    Logger.Info(www.Result);
 
 
-                    Console.WriteLine("Selling:" + quoteCurrency + "  pricePerCoin:" +
+                    Logger.Info("Selling:" + quoteCurrency + "  pricePerCoin:" +
                         String.Format("{0:F20}", pricePerCoin) +
                         "  amountQuote:" + amountQuote + " currencyBuyPrice:"
                         + String.Format("{0:F20}", currencyBuyPrice) + " newAmountBase:"
                         + String.Format("{0:F20}", newAmountBase));
                     SyncTrades(quoteCurrency);
-                    Thread.Sleep(500);
                 }
 
             }
         }
 
-        private void BuyCurrency(QuoteCurrency quoteCurrencyObj, BTC bitcoinObj, string quoteCurrency, Jojatekok.PoloniexAPI.MarketTools.IOrderBook markets)
+        private void BuyCurrency(QuoteCurrency quoteCurrencyObj,
+            BTC bitcoinObj,
+          PQuoteCurrency quoteCurrencyObj2,
+            Jojatekok.PoloniexAPI.MarketTools.IOrderBook markets)
         {
             var fldcValue = quoteCurrencyObj.btcValue;
+            string quoteCurrency = quoteCurrencyObj2.QuoteCurrencySymbol;
             try
             {
                 double altLimitForBTC = 0.0001;
                 if (bitcoinObj.available > altLimitForBTC)
                 {
-                    Console.WriteLine(bitcoinObj);
+                    Logger.Info(bitcoinObj);
 
                     var currencyBuyPrice = markets.SellOrders.FirstOrDefault().PricePerCoin;
 
-                    double pricePerCoin = currencyBuyPrice - currencyBuyPrice * 0.1;
+                    double pricePerCoin = currencyBuyPrice - currencyBuyPrice * quoteCurrencyObj2.BuyOrderPricePercantege / 100.0;
                     double amountQuote = bitcoinObj.available / pricePerCoin;
 
                     var www = PoloniexClient.Trading.PostOrderAsync(new CurrencyPair("BTC", quoteCurrency),
@@ -256,10 +175,10 @@ namespace PoloneixApiBot
                        pricePerCoin,
                        amountQuote);
                     www.Wait();
-                    Console.WriteLine(www.Result);
+                    Logger.Info(www.Result);
 
-                    Console.WriteLine("Buying:" + quoteCurrency + "  pricePerCoin:" + String.Format("{0:F20}", pricePerCoin) + "  amountQuote:" + amountQuote + " ");
-                    Thread.Sleep(500);
+                    Logger.Info("Buying:" + quoteCurrency + "  pricePerCoin:" + String.Format("{0:F20}", pricePerCoin) + "  amountQuote:" + amountQuote + " ");
+                   
                     SyncTrades(quoteCurrency);
 
                 }
@@ -267,13 +186,13 @@ namespace PoloneixApiBot
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Logger.Info(ex.Message);
             }
         }
 
         private void SyncTrades(string quoteCurrency)
         {
-            Thread.Sleep(100);
+            Thread.Sleep(500);
             var t2 = PoloniexClient.Trading.GetTradesAsync(new CurrencyPair("BTC", quoteCurrency));
             t2.Wait();
             foreach (Trade item2 in t2.Result)
