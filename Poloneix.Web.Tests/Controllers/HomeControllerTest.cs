@@ -6,12 +6,17 @@ using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Poloneix.Web;
 using Poloneix.Web.Controllers;
+using Jojatekok.PoloniexAPI;
+using Jojatekok.PoloniexAPI.WalletTools;
+using PoloneixApi.Domain;
 
 namespace Poloneix.Web.Tests.Controllers
 {
     [TestClass]
     public class HomeControllerTest
     {
+   
+
         [TestMethod]
         public void Index()
         {
@@ -49,6 +54,16 @@ namespace Poloneix.Web.Tests.Controllers
 
             // Assert
             Assert.IsNotNull(result);
+        }
+         
+        [TestMethod]
+        public void GetTradesAsync()
+        {
+            var PoloniexClient = new PoloniexClient(Settings.PublicKey, Settings.PrivateKey);
+            var t2 = PoloniexClient.Trading.GetTradesAsync(new CurrencyPair("BTC", "POT"));
+            t2.Wait();
+            var r = t2.Result;
+
         }
     }
 }

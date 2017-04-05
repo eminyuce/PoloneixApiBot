@@ -62,7 +62,7 @@ namespace PoloneixApiBot
         public async void StartTrading()
         {
             //Populate our dictionary of currency to play.
-            PopulateCurrencyDic(); 
+            PopulateCurrencyDic();
             var cnt = QuoteCurrencyDic.Keys.Count;
             //Get the all our wallet current currency to trade, what we have and how much we have for each of them. 
             var p = PoloniexClient.Wallet.GetBalances2Async();
@@ -75,7 +75,7 @@ namespace PoloneixApiBot
 
 
             //Quote currencies dictionary, it stores currencies with its PQuoteCurrency object.
-             
+
             foreach (var quoteCurrencySymbol in QuoteCurrencyDic.Keys)
             {
                 // PQuoteCurrency class has percantage value properties of 
@@ -108,13 +108,18 @@ namespace PoloneixApiBot
 
                         // Make buy operation if we do not have any open orders for the currency
                         // Do not buy any currency TWICE.
-                        if (!openOrdersForCurrency.Result.Any() && totalBitcoinValue > 0)
+                        if (!openOrdersForCurrency.Result.Any(r => r.Type == OrderType.Buy) && totalBitcoinValue > 0)
                         {
                             BTC bitcoinObjFldc = new BTC();
                             bitcoinObjFldc.btcValue = bitcoinObj.btcValue;
                             bitcoinObjFldc.onOrders = bitcoinObj.onOrders;
                             // Only buy enough for its BTC percantage, prevent to spend all available BTC for one currency
                             bitcoinObjFldc.available = totalBitcoinValue * percentage / 100.0;
+                            if (bitcoinObj.available < AltLimitForBTC)
+                            {
+                                bitcoinObj.available = AltLimitForBTC * percentage;
+                                Logger.Trace(quoteCurrencySymbol+ "available: " + bitcoinObj.available);
+                            }
                             totalBitcoinValue = totalBitcoinValue - bitcoinObjFldc.available;
                             BuyCurrency(quoteCurrencyObj, bitcoinObjFldc, QuoteCurrency, markets.Result);
                         }
@@ -140,7 +145,7 @@ namespace PoloneixApiBot
         }
 
 
-   
+
 
 
         private void SellCurrency(QuoteCurrency quoteCurrencyObj,
@@ -215,15 +220,15 @@ namespace PoloneixApiBot
             string quoteCurrency = quoteCurrencyObj2.QuoteCurrencySymbol;
             try
             {
-                
+
                 if (bitcoinObj.available > AltLimitForBTC)
                 {
                     Logger.Info(bitcoinObj);
 
-                   // we are trying to buy the price of whoever makes sell order first. whoever offers first. 
+                    // we are trying to buy the price of whoever makes sell order first. whoever offers first. 
                     var currencySellPrice = markets.SellOrders.FirstOrDefault().PricePerCoin;
 
-                  
+
                     double pricePerCoin = currencySellPrice - currencySellPrice * quoteCurrencyObj2.BuyOrderPricePercantege / 100.0;
                     double amountQuote = bitcoinObj.available / pricePerCoin;
 

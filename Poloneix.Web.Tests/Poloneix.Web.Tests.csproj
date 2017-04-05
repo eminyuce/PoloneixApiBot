@@ -96,6 +96,18 @@
       <Project>{A9E303EA-CDF2-4E33-9893-83F7B105D9CA}</Project>
       <Name>Poloneix.Web</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PoloneixApi.Domain\PoloneixApi.Domain.csproj">
+      <Project>{29979d7e-93d7-4806-a636-2134fb5449ad}</Project>
+      <Name>PoloneixApi.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PoloneixApiBot\PoloneixApiBot.csproj">
+      <Project>{532e3ded-013a-49a9-a56b-4c96832fc096}</Project>
+      <Name>PoloneixApiBot</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PoloniexApi.Net\PoloniexApi.Net.csproj">
+      <Project>{bc5546fa-4f27-4a57-abe0-2691d1e8b51c}</Project>
+      <Name>PoloniexApi.Net</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
