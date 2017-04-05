@@ -14,11 +14,11 @@ namespace PoloneixApiBot
     class Program
     {
         protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
-
+       
         static void Main(string[] args)
         {
             StartInstaller(args);
-
+             
         }
 
         private static void StartInstaller(string[] args)

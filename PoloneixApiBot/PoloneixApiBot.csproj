@@ -82,12 +82,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DB\DatabaseUtility.cs" />
-    <Compile Include="DB\DBDirectory.cs" />
-    <Compile Include="Entities\PQuoteCurrency.cs" />
-    <Compile Include="Entities\SellBuyOrderQuote.cs" />
-    <Compile Include="Helpers\Convert.cs" />
-    <Compile Include="Helpers\QuoteCurrencyHelper.cs" />
     <Compile Include="Installer1.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -99,8 +93,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Quartz\PoloniexQuartzService.cs" />
     <Compile Include="Quartz\QuartzJob\TradingJob.cs" />
-    <Compile Include="Repositories\SellBuyOrderQuoteRepository.cs" />
-    <Compile Include="Settings.cs" />
     <Compile Include="TradingService.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -122,6 +114,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\PoloneixApi.Domain\PoloneixApi.Domain.csproj">
+      <Project>{29979d7e-93d7-4806-a636-2134fb5449ad}</Project>
+      <Name>PoloneixApi.Domain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PoloniexApi.Net\PoloniexApi.Net.csproj">
       <Project>{bc5546fa-4f27-4a57-abe0-2691d1e8b51c}</Project>
       <Name>PoloniexApi.Net</Name>

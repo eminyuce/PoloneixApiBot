@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 using Jojatekok.PoloniexAPI;
 using Jojatekok.PoloniexAPI.TradingTools;
 using System.Reflection;
-using PoloneixApiBot.Entities;
-using PoloneixApiBot.Repositories;
+using PoloneixApi.Domain.Entities;
+using PoloneixApi.Domain.Repositories;
 using System.Threading;
 using Jojatekok.PoloniexAPI.WalletTools;
 using NLog;
-using PoloneixApiBot.Helpers;
+using PoloneixApi.Domain.Helpers;
+using System.Text.RegularExpressions;
 
 namespace PoloneixApiBot
 {
@@ -27,19 +28,29 @@ namespace PoloneixApiBot
         public PatienceBot(string publicKey, string privateKey)
         {
             PoloniexClient = new PoloniexClient(publicKey, privateKey);
+        }
+
+        private void PopulateCurrencyDic()
+        {
             QuoteCurrencyDic = new Dictionary<String, PQuoteCurrency>();
 
-            QuoteCurrencyDic.Add("AMP", new PQuoteCurrency(5, 4, 4, "AMP"));
-            QuoteCurrencyDic.Add("FLDC", new PQuoteCurrency(5, 3, 3, "FLDC"));
-            QuoteCurrencyDic.Add("SDC", new PQuoteCurrency(5, 3, 3, "SDC"));
-            QuoteCurrencyDic.Add("BURST", new PQuoteCurrency(5, 3, 3, "BURST"));
-            QuoteCurrencyDic.Add("STEEM ", new PQuoteCurrency(5, 3, 3, "STEEM "));
-            QuoteCurrencyDic.Add("XMR", new PQuoteCurrency(5, 3, 3, "XMR"));
-            QuoteCurrencyDic.Add("PASC", new PQuoteCurrency(5, 3, 3, "PASC"));
-            QuoteCurrencyDic.Add("XRP", new PQuoteCurrency(5, 3, 3, "XRP"));
-            QuoteCurrencyDic.Add("ETC", new PQuoteCurrency(5, 3, 3, "ETC"));
-            QuoteCurrencyDic.Add("ETH", new PQuoteCurrency(5, 3, 3, "ETH"));
+            string line = "";
+            // Read the file and display it line by line.
+            System.IO.StreamReader file =
+               new System.IO.StreamReader("D:\\Services\\currency.txt");
+            while ((line = file.ReadLine()) != null)
+            {
+                var parts = Regex.Split(line, @",").Select(r => r.Trim()).Where(s => !String.IsNullOrEmpty(s)).ToList();
+                QuoteCurrencyDic.Add(parts.LastOrDefault(),
+                    new PQuoteCurrency(parts.FirstOrDefault().ToInt(),
+                    parts.Skip(1).FirstOrDefault().ToInt(),
+                    parts.Skip(2).FirstOrDefault().ToInt(),
+                    parts.LastOrDefault()));
+            }
+
+            file.Close();
         }
+
         public async void LoadMarketSummaryAsync()
         {
             var markets = await PoloniexClient.Markets.GetSummaryAsync();
@@ -50,40 +61,65 @@ namespace PoloneixApiBot
         }
         public async void StartTrading()
         {
+            //Populate our dictionary of currency to play.
+            PopulateCurrencyDic(); 
             var cnt = QuoteCurrencyDic.Keys.Count;
+            //Get the all our wallet current currency to trade, what we have and how much we have for each of them. 
             var p = PoloniexClient.Wallet.GetBalances2Async();
             p.Wait();
+
+            //Total BTC in our wallet. It will increase or decrease based on our buying-selling other currency
             BTC bitcoinObj = p.Result.BTC;
+            // Play only currency if we have enough BTC.
             double totalBitcoinValue = bitcoinObj.available;
 
+
+            //Quote currencies dictionary, it stores currencies with its PQuoteCurrency object.
+             
             foreach (var quoteCurrencySymbol in QuoteCurrencyDic.Keys)
             {
-                var QuoteCurrency = QuoteCurrencyDic[quoteCurrencySymbol];
+                // PQuoteCurrency class has percantage value properties of 
+                // Total BTC will be used
+                // buying order based on market latest selling transaction, ex. buy its less 4 percant of latest transcation  
+                // selling order based on our buying price or the latest buying transaction, which ever bigger. 
+                // Its symbol
+                PQuoteCurrency QuoteCurrency = QuoteCurrencyDic[quoteCurrencySymbol];
 
-                // Play only selected currency.
+
+                // Total bitcoin value will be shared for all other currency, will be decreased for each buy operation 
+                // so that percantage calculation will be accurate for all buy operation.
                 if (QuoteCurrency.TotalBitcoinPercantege > 0)
                 {
 
                     try
                     {
                         var percentage = QuoteCurrency.TotalBitcoinPercantege;
+                        //Get currency object how much we have available
                         var quoteCurrencyObj = QuoteCurrencyHelper.GetQuoteCurrency(p.Result, quoteCurrencySymbol);
+
+                        // Get open orders of market for that currency so that we can make a decision of buying or selling.
                         var markets = PoloniexClient.Markets.GetOpenOrdersAsync(new CurrencyPair("BTC", QuoteCurrency.QuoteCurrencySymbol));
                         markets.Wait();
+
+                        // Get open orders of ours for that currency
                         var openOrdersForCurrency = PoloniexClient.Trading.GetOpenOrdersAsync(new CurrencyPair("BTC", QuoteCurrency.QuoteCurrencySymbol));
                         openOrdersForCurrency.Wait();
 
+
+                        // Make buy operation if we do not have any open orders for the currency
+                        // Do not buy any currency TWICE.
                         if (!openOrdersForCurrency.Result.Any() && totalBitcoinValue > 0)
                         {
                             BTC bitcoinObjFldc = new BTC();
                             bitcoinObjFldc.btcValue = bitcoinObj.btcValue;
                             bitcoinObjFldc.onOrders = bitcoinObj.onOrders;
+                            // Only buy enough for its BTC percantage, prevent to spend all available BTC for one currency
                             bitcoinObjFldc.available = totalBitcoinValue * percentage / 100.0;
                             totalBitcoinValue = totalBitcoinValue - bitcoinObjFldc.available;
                             BuyCurrency(quoteCurrencyObj, bitcoinObjFldc, QuoteCurrency, markets.Result);
                         }
 
-
+                        // Make only sell operation if we do not have sell operation and enough available currency.
                         if (!openOrdersForCurrency.Result.Any(r => r.Type == OrderType.Sell))
                         {
                             SellCurrency(quoteCurrencyObj, QuoteCurrency, markets.Result);

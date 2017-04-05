@@ -6,15 +6,14 @@ using System.Text;
 using System.Threading.Tasks;
 using NLog;
 using Quartz;
+using PoloneixApi.Domain;
 
 namespace PoloneixApiBot.Quartz.QuartzJob
 {
     public class TradingJob : IJob
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
-        public static string PublicKey;
-        public static string PrivateKey;
-
+        
 
         public void Execute(IJobExecutionContext context)
         {
@@ -25,7 +24,7 @@ namespace PoloneixApiBot.Quartz.QuartzJob
             stopwatch.Stop();
             TimeSpan ts = stopwatch.Elapsed;
             string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}", ts.Hours, ts.Minutes, ts.Seconds, ts.Milliseconds / 10);
-            var p = new PatienceBot(PublicKey, PrivateKey);
+            var p = new PatienceBot(Settings.PublicKey, Settings.PrivateKey);
             p.StartTrading();
             Logger.Info(String.Format("TradingJob is finished. Elapsed Seconds={0}",elapsedTime));
            

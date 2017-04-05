@@ -8,6 +8,7 @@ using Quartz;
 using Quartz.Impl;
 using Quartz.Impl.Triggers;
 using PoloneixApiBot.Quartz.QuartzJob;
+using PoloneixApi.Domain;
 
 namespace PoloneixApiBot.Quartz
 {
