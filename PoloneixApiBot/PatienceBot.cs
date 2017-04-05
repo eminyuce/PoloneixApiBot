@@ -19,7 +19,7 @@ namespace PoloneixApiBot
     public class PatienceBot
     {
         protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
-
+        private static double AltLimitForBTC = 0.0001;
         private PoloniexClient PoloniexClient { get; set; }
         private Dictionary<String, PQuoteCurrency> QuoteCurrencyDic { get; set; }
 
@@ -159,7 +159,7 @@ namespace PoloneixApiBot
                     var latestQuote = SellBuyOrderQuoteRepository.GetLatestTransactionCurrency(quoteCurrency,
                         OrderType.Buy.ToString());
 
-
+                    // we are selling based on whichever price is bigger, our latest buy price or current market buying price of it.
                     var firstBuyOrder = markets.BuyOrders.FirstOrDefault();
                     var currencyBuyPrice = latestQuote.PricePerCoin;
                     if (latestQuote.PricePerCoin < firstBuyOrder.PricePerCoin)
@@ -215,14 +215,16 @@ namespace PoloneixApiBot
             string quoteCurrency = quoteCurrencyObj2.QuoteCurrencySymbol;
             try
             {
-                double altLimitForBTC = 0.0001;
-                if (bitcoinObj.available > altLimitForBTC)
+                
+                if (bitcoinObj.available > AltLimitForBTC)
                 {
                     Logger.Info(bitcoinObj);
 
-                    var currencyBuyPrice = markets.SellOrders.FirstOrDefault().PricePerCoin;
+                   // we are trying to buy the price of whoever makes sell order first. whoever offers first. 
+                    var currencySellPrice = markets.SellOrders.FirstOrDefault().PricePerCoin;
 
-                    double pricePerCoin = currencyBuyPrice - currencyBuyPrice * quoteCurrencyObj2.BuyOrderPricePercantege / 100.0;
+                  
+                    double pricePerCoin = currencySellPrice - currencySellPrice * quoteCurrencyObj2.BuyOrderPricePercantege / 100.0;
                     double amountQuote = bitcoinObj.available / pricePerCoin;
 
                     var www = PoloniexClient.Trading.PostOrderAsync(new CurrencyPair("BTC", quoteCurrency),
@@ -256,6 +258,7 @@ namespace PoloneixApiBot
                 {
                     var item = new SellBuyOrderQuote();
                     item.IdOrder = item2.IdOrder;
+                    // Misnaming of property in the SellBuyOrderQuote.TypeInternal, it is quote currency symbol
                     item.TypeInternal = quoteCurrency;
                     item.Type = item2.Type.ToString();
                     item.PricePerCoin = item2.PricePerCoin;

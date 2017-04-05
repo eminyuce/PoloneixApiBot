@@ -8,6 +8,7 @@ namespace PoloneixApi.Domain.Entities
 {
     public class PQuoteCurrency
     {
+        public int Id { get; set; }
         public int TotalBitcoinPercantege { get; set; }
 
         public int BuyOrderPricePercantege { get; set; }
@@ -16,6 +17,10 @@ namespace PoloneixApi.Domain.Entities
 
         public string QuoteCurrencySymbol { get; set; }
 
+        public PQuoteCurrency()
+        {
+
+        }
         public PQuoteCurrency(int TotalBitcoinPercantege, 
             int BuyOrderPricePercantege, 
             int SellOrderPricePercantege, 
